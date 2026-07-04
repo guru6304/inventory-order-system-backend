@@ -6,7 +6,6 @@ app.use(express.json());
 app.use(cors({
     origin: "http://localhost:5173" 
 }));
-
 const authRoutes= require("./routes/authRoutes");
 
 const productsRoutes= require("./routes/productRoutes");
