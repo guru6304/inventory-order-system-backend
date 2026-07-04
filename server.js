@@ -4,7 +4,7 @@ const express= require("express");
 const app= express();
 app.use(express.json());
 app.use(cors({
-    origin: "inventory-order-system-backend-production.up.railway.app" 
+    origin: "http://localhost:5173" 
 }));
 
 const authRoutes= require("./routes/authRoutes");
