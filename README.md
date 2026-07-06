@@ -242,6 +242,8 @@ Contents:
 
 These files can be used to recreate the database and understand the relationships between tables.
 
+![ER Diagram](database/ER_Diagram.png)
+
 ## API Validation Images
 
 The `ValidationImages` folder contains screenshots captured while testing the backend REST APIs using **Postman**.
