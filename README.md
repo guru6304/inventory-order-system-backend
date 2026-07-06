@@ -12,6 +12,20 @@ https://endearing-learning-production-acc0.up.railway.app/api
 
 ---
 
+## Database
+
+The complete database resources are available inside the `database` folder.
+
+Contents:
+
+- Inventory_Order_System.sql
+- ER_Diagram.png
+- Database_Schema.png
+
+These files can be used to recreate the database and understand the relationships between tables.
+
+![ER Diagram](database/ER_Diagram.png)
+
 ## Features
 
 ### Authentication
@@ -230,19 +244,6 @@ JWT_SECRET=your_secret_key
 
 ---
 
-## Database
-
-The complete database resources are available inside the `database` folder.
-
-Contents:
-
-- Inventory_Order_System.sql
-- ER_Diagram.png
-- Database_Schema.png
-
-These files can be used to recreate the database and understand the relationships between tables.
-
-![ER Diagram](database/ER_Diagram.png)
 
 ## API Validation Images
 
