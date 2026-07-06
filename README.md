@@ -242,6 +242,24 @@ Contents:
 
 These files can be used to recreate the database and understand the relationships between tables.
 
+## API Validation Images
+
+The `ValidationImages` folder contains screenshots captured while testing the backend REST APIs using **Postman**.
+
+These screenshots demonstrate that each endpoint was tested successfully during development.
+
+### Included API Tests
+
+#### Authentication
+
+-Registration as Customer and Admin
+-Login as Customer and Admin
+-Invalid Login Handling
+-JWT Authentication
+-Get All Products
+-Product Not Found.
+
+
 ## Author
 
 Developed by **Guru**
