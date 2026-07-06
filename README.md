@@ -230,6 +230,18 @@ JWT_SECRET=your_secret_key
 
 ---
 
+## Database
+
+The complete database resources are available inside the `database` folder.
+
+Contents:
+
+- Inventory_Order_System.sql
+- ER_Diagram.png
+- Database_Schema.png
+
+These files can be used to recreate the database and understand the relationships between tables.
+
 ## Author
 
 Developed by **Guru**
