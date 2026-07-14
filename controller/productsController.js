@@ -2,12 +2,27 @@ const pool = require("../config/db");
 
 const getAllProducts = async (req, res, next) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+
     const [rows] = await pool.query(
-      "SELECT p.id, p.category_id,p.name,p.description,p.price,p.stock_quantity, c.name as category_name from products p join categories c on p.category_id= c.id ",
+      "SELECT p.id, p.category_id,p.name,p.description,p.price,p.stock_quantity, p.file_name, p.folder_name, c.name as category_name from products p join categories c on p.category_id= c.id LIMIT ? OFFSET ?",
+      [limit, offset]
     );
+
+    const [totalRows] = await pool.query("SELECT COUNT(*) as count FROM products");
+    const totalPages = Math.ceil(totalRows[0].count / limit);
+
     return res.status(200).json({
       message: "Products Fetch Successful",
       data: rows,
+      pagination: {
+        page,
+        limit,
+        totalPages,
+        totalItems: totalRows[0].count
+      }
     });
   } catch (err) {
     next(err);
@@ -18,9 +33,9 @@ const getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows] = await pool.query(
-      " SELECT p.id, p.category_id,p.name,p.description,p.price,p.stock_quantity, c.name as category_name from products p join categories c on p.category_id= c.id where p.id=?",
+      " SELECT p.id, p.category_id,p.name,p.description,p.price,p.stock_quantity, p.file_name, p.folder_name, c.name as category_name from products p join categories c on p.category_id= c.id where p.id=?",
       [id],
-    ); //product id not category_id or category id.
+    ); 
     if (rows.length === 0) {
       return res.status(404).json({
         message: "Product Not Available",
@@ -38,6 +53,13 @@ const getProductById = async (req, res, next) => {
 const createProducts = async (req, res, next) => {
   try {
     const { category_id, name, description, price, stock_quantity } = req.body;
+    let file_name = null;
+    let folder_name = 'uploads/products';
+
+    if (req.file) {
+      file_name = req.file.filename;
+    }
+
     if (
       category_id == null ||
       !name?.trim() ||
@@ -58,8 +80,8 @@ const createProducts = async (req, res, next) => {
       });
     }
     const [rows] = await pool.query(
-      "INSERT INTO products (category_id,name,description,price,stock_quantity) VALUES (?,?,?,?,?)",
-      [category_id, name, description, price, stock_quantity],
+      "INSERT INTO products (category_id,name,description,price,stock_quantity,file_name,folder_name) VALUES (?,?,?,?,?,?,?)",
+      [category_id, name, description, price, stock_quantity, file_name, folder_name],
     );
 
     return res.status(201).json({
@@ -71,6 +93,8 @@ const createProducts = async (req, res, next) => {
         description,
         price,
         stock_quantity,
+        file_name,
+        folder_name
       },
     });
   } catch (err) {

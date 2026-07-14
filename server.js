@@ -1,6 +1,7 @@
 const cors = require("cors");
 require("dotenv").config();
 const express= require("express");
+const path = require("path");
 const app= express();
 app.use(express.json());
 app.use(cors({
@@ -9,16 +10,15 @@ app.use(cors({
         ],
         credentials: true
     }));
+
+// Expose the uploads folder to the frontend
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 const authRoutes= require("./routes/authRoutes");
-
 const productsRoutes= require("./routes/productRoutes");
-
 const CategoriesRoutes= require("./routes/categoryRoutes");
-
 const OrdersRoutes= require("./routes/ordersRoutes");
-
 const wishlistRoutes= require("./routes/wishlistRoutes");
-
 const { errorHandler, routeError } = require("./middleware/errorHandler");
  
 app.use((req,res,next)=>{
@@ -33,11 +33,8 @@ app.use("/api/orders",OrdersRoutes);
 app.use("/api/wishlist",wishlistRoutes);
 
 app.use(routeError);
-
 app.use(errorHandler);
 
 app.listen(process.env.PORT || 5000,()=>{
     console.log(`Running Port on ${process.env.PORT ||5000}`)
 });
-
-
