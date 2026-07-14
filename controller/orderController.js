@@ -50,8 +50,8 @@ const createOrder = async (req, res,next) => {
       });
     }
     const [orderRows] = await connection.query(
-      "INSERT INTO orders (user_id,total_amount) VALUES(?,?)",
-      [user_id, total_amount],
+      "INSERT INTO orders (user_id,total_amount,status) VALUES(?,?,?)",
+      [user_id, total_amount,'confirmed'],
     );
     const orderId = orderRows.insertId;
     for (const item of preparedItems) {
@@ -146,6 +146,7 @@ const getAllOrders = async (req, res,next) => {
           status: row.status,
           total_amount: row.total_amount,
           reserved_at: row.reserved_at,
+          user:row.user_name,
           items: [],
         };
       }
