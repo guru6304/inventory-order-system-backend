@@ -6,12 +6,6 @@ The application is built using Node.js, Express.js, MySQL, and JWT Authenticatio
 
 ---
 
-## API Base URL
-
-https://endearing-learning-production-acc0.up.railway.app/api
-
----
-
 ## Database
 
 The complete database resources are available inside the `database` folder.
@@ -265,7 +259,7 @@ These screenshots demonstrate that each endpoint was tested successfully during 
 
 ## Author
 
-Developed by **Guru**
+Developed by **Guru Swamy Lanka**
 
 GitHub:
 https://github.com/guru6304
